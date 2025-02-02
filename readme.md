@@ -1,4 +1,5 @@
-# Zapper + Bybit Portfolio Tracker
+# Zapper + Bybit 
+Portfolio Tracker
 Small Python service to capture a historic snapshot of your Zapper and Bybit portfolios. 
 
 # Config Structure
@@ -50,6 +51,7 @@ docker run -d --name portfolio-tracker --restart always <LOCATION>-docker.pkg.de
 For the service to run properly, it requires two tables in your databass, prices and balances
 
 ## Prices Table
+```
 CREATE TABLE prices (
     id SERIAL PRIMARY KEY,
     pair VARCHAR(20) NOT NULL,
@@ -59,14 +61,17 @@ CREATE TABLE prices (
     snapshot_time TIMESTAMP NOT NULL,
     UNIQUE (pair, snapshot_time) -- Ensure no duplicate entries for the same pair and timestamp
 );
+```
 
 ## Balances table
+```
 CREATE TABLE balances (
     id SERIAL PRIMARY KEY,
     snapshot_time TIMESTAMP NOT NULL,
     source VARCHAR(255) NOT NULL,
     usd_value DECIMAL(18, 2) NOT NULL
 );
+```
 
 
 ## Debugging
